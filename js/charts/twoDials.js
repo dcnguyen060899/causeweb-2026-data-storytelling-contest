@@ -55,8 +55,10 @@ const TwoDials = (() => {
 
   /* ---------- Build custom dial SVG inside a host <div class="dial-knob"> ---------- */
   function buildKnob(letter) {
-    const knobEl = document.getElementById('dial-' + letter.toLowerCase() + '-knob');
-    if (!knobEl) return null;
+    const existing = document.getElementById('dial-' + letter.toLowerCase() + '-knob');
+    if (!existing) return null;
+    const knobEl = existing.cloneNode(false);
+    existing.parentNode.replaceChild(knobEl, existing);
     knobEl.innerHTML = '';
 
     /* viewBox coordinate space — actual pixel size scales via CSS width: 100% */

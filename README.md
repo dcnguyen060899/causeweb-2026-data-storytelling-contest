@@ -125,3 +125,7 @@ Opening `index.html` directly via `file://` works in most browsers, but serving 
 - [x] Methodology act labels every figure as verified / pattern / illustrative
 - [x] Left-edge scroll-progress bar tracks reading position
 - [x] All datasets cited with source, year, and methodology caveat where relevant
+- [x] D3 and Scrollama self-hosted under `js/vendor/` (no CDN dependency)
+- [x] Dial pointer-listener leak on resize fixed (clone-and-replace knob element)
+- [x] Wage polarization low-skill dashed line restored after reveal animation
+- [x] Act 6 "78% misclassification" copy corrected to "above random chance"
