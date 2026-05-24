@@ -109,34 +109,6 @@ Opening `index.html` directly via `file://` works in most browsers, but serving 
 
 ---
 
-## Known issues (post-audit, pre-submission)
-
-These were surfaced by a multi-agent code + judge + data review and are in-progress fixes:
-
-1. **[HIGH] CDN dependency risk** — D3 and Scrollama are loaded from jsDelivr/unpkg without SRI hashes. If either CDN is unreachable, all charts fail silently. Fix: self-host both libraries under `js/vendor/` or add `integrity`/`crossorigin` attributes.
-
-2. **[HIGH] Dial pointer-listener leak on resize** — `twoDials.js` re-attaches `pointerdown/move/up` listeners each time `setup()` runs without removing prior ones. After N resize events, each pointer event fires N handlers, making drag erratic on mobile (where resize fires on address-bar toggle). Fix: clone-and-replace the knob element before attaching handlers, or guard with a `removeEventListener` cleanup step.
-
-3. **[MEDIUM] Low-skill dashed line lost after reveal animation** — `wagePolarization.js:77-84` sets `stroke-dasharray: '4 3'` then immediately overwrites it with the draw-on animation stroke offsets. The line renders as solid after the animation completes, contradicting the prose ("the dashed gray line"). Fix: restore `stroke-dasharray` at the end of the transition.
-
-4. **[MEDIUM] Act 6 — "78% / below random chance" contradiction** — The on-page text reads "78% of people misclassify AI-generated images as human-made … below random chance." 78% is *above* a 50% baseline; number and words disagree. Fix: correct the gloss to "above chance" or adjust the framing.
-
-5. **[MEDIUM] `signFlipTimeline` state not reset after resize** — Module-scope `currentT` persists across `setup()` calls; paths are re-created at full `dashoffset` but `currentT > 0`, causing a momentary blank centerpiece after resize while Act 4 is on-screen. Fix: call `applyVisuals()` at the end of `setup()` when `currentT > 0`.
-
----
-
-## Judge scorecard (pre-submission review)
-
-| Criterion | Score | Note |
-|-----------|-------|------|
-| Compelling narrative | 4 / 5 | Strong spine; Act 6 detour competes with the ending |
-| Sound data interpretation | 3.5 / 5 | Exemplary labeling discipline; pulled down by the 78% contradiction |
-| Effective scrollytelling | 4 / 5 | Sign-flip playhead and dials do real narrative work; other acts are enter-and-draw |
-| Visual polish | 4.5 / 5 | Disciplined five-token palette, considered typography, near-professional |
-| **Overall** | **16 / 20** | Competitive; fixing items 2 and 4 above targets 17.5–18 |
-
----
-
 ## Quality checklist
 
 - [x] No author / institution / handle identifiers anywhere in the artifact, repo config, or meta tags
@@ -153,7 +125,3 @@ These were surfaced by a multi-agent code + judge + data review and are in-progr
 - [x] Methodology act labels every figure as verified / pattern / illustrative
 - [x] Left-edge scroll-progress bar tracks reading position
 - [x] All datasets cited with source, year, and methodology caveat where relevant
-- [ ] D3 + Scrollama self-hosted or SRI-pinned (CDN fallback risk — see Known Issues #1)
-- [ ] Dial listener leak on resize fixed (see Known Issues #2)
-- [ ] Wage polarization dashed line restored (see Known Issues #3)
-- [ ] Act 6 "78% / below random chance" contradiction resolved (see Known Issues #4)

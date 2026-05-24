@@ -110,7 +110,10 @@ const WagePolarization = (() => {
       const visible = reveal[s.key];
       path.transition()
         .duration(1100).ease(easeOut)
-        .attr('stroke-dashoffset', visible ? 0 : totalLen);
+        .attr('stroke-dashoffset', visible ? 0 : totalLen)
+        .on('end', function() {
+          if (visible && s.dasharray) d3.select(this).attr('stroke-dasharray', s.dasharray);
+        });
 
       g.select(`text[data-label="${s.key}"]`)
         .transition().duration(700).delay(visible ? 600 : 0)
