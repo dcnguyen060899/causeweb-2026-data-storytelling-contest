@@ -91,6 +91,18 @@ html, body {
   justify-content: center;
 }
 
+/* Act 4 small-screen insurance. Act 4 stacks the most graphic content of any
+   act (sign-flip chart + historical twin-wage chart + two stat cards). On a
+   viewport tall enough to hold it, `safe center` behaves exactly like
+   `center` — zero visual change. On a short laptop where the stack would
+   exceed 100svh, `safe` keeps the TOP anchored (so nothing is clipped out of
+   reach) and overflow-y lets the reader scroll within the pinned panel to
+   reach the stat cards. Engages only on overflow; invisible otherwise. */
+#act-4 .scroll-graphic {
+  align-items: safe center;
+  overflow-y: auto;
+}
+
 .scroll-text {
   position: relative;
   z-index: 10;
