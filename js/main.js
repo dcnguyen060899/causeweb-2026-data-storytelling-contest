@@ -16,11 +16,11 @@
      1 — Two Camps     (ENTER)
      2 — Exposure      (ENTER)
      3 — Squeeze       (ENTER, wage polarization)
-     4 — Rebound       (ENTER, Baumol bars; sign-flip line is added in
-                        next iteration with PROGRESS)
-     5 — Jordan        (ENTER)
-     6 — Spectrum      (ENTER)
-     7 — Methodology   (no chart)
+     4 — Rebound       (ENTER, tech-transitions natural experiment;
+                        sign-flip line is PROGRESS)
+     5 — Two Dials     (ENTER, interactive)
+     6 — Jordan        (ENTER; ends with the conclusion card)
+     8 — Methodology   (no chart)
 */
 
 (function () {
@@ -32,10 +32,9 @@
     ExposureChart.setup();
     WagePolarization.setup();
     SignFlipTimeline.setup();
-    BaumolChart.setup();
+    TechTransitions.setup();
     TwoDials.setup();
     JordanTriangle.setup();
-    SpectrumViz.setup();
   }
 
   const ENTER_HANDLERS = {
@@ -48,10 +47,9 @@
     '1': (i) => TwoCamps.update(i),
     '2': (i) => ExposureChart.update(i),
     '3': (i) => WagePolarization.update(i),
-    '4': (i) => BaumolChart.update(i),
+    '4': (i) => TechTransitions.update(i),
     '5': (i) => TwoDials.update(i),
-    '6': (i) => JordanTriangle.update(i),
-    '7': (i) => SpectrumViz.update(i)
+    '6': (i) => JordanTriangle.update(i)
   };
 
   const PROGRESS_HANDLERS = {

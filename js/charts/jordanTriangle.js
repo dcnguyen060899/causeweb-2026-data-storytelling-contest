@@ -156,15 +156,15 @@ const JordanTriangle = (() => {
         .attr('r', 40).attr('stroke-opacity', 0);
     });
 
-    /* Step 6: the "who moves the dials" note appears below the ECONOMICS
+    /* Step 5: the "who moves the dials" note appears below the ECONOMICS
        node, and the econ halo gets one larger vermilion pulse to draw the
        eye to the contested-dial point. */
     const annotation = svg.select('.econ-annotation');
     if (!annotation.empty()) {
       annotation.transition().duration(700)
-        .attr('opacity', stepIndex >= 6 ? 1 : 0);
+        .attr('opacity', stepIndex >= 5 ? 1 : 0);
     }
-    if (stepIndex === 6) {
+    if (stepIndex === 5) {
       svg.select('g[data-node="econ"] .triangle-node-halo')
         .interrupt()
         .attr('r', 26).attr('stroke-opacity', 0.85).attr('stroke', COLORS.accent)
@@ -172,13 +172,13 @@ const JordanTriangle = (() => {
         .attr('r', 56).attr('stroke-opacity', 0);
     }
 
-    /* Step 7: contestation evidence — the counter-arrows beat. The block
+    /* Step 6: contestation evidence — the counter-arrows beat. The block
        is in the scroll-text column (inline with the prose, not in the
        sticky chart-frame). Reveal it, then count both numbers up from 0
        to their target values in ~900ms with cubic ease-out. */
     const evidence = document.getElementById('contestation-evidence');
     if (evidence) {
-      const showEvidence = stepIndex >= 7;
+      const showEvidence = stepIndex >= 6;
       evidence.classList.toggle('is-visible', showEvidence);
       if (showEvidence && !evidence.dataset.counted) {
         evidence.dataset.counted = '1';
@@ -201,29 +201,6 @@ const JordanTriangle = (() => {
         evidence.querySelectorAll('.contestation-number').forEach(el => {
           el.textContent = '0%';
         });
-      }
-    }
-
-    /* flowchart on step 5 */
-    const flowEl = document.getElementById('jordan-flowchart');
-    if (flowEl) {
-      if (stepIndex >= 5) {
-        flowEl.classList.add('visible');
-        if (!flowEl.dataset.built) {
-          flowEl.innerHTML = `
-            <div class="flow-row">
-              <div class="flow-box">Submit cherry-<br/>picked results</div>
-              <div class="flow-arrow">→</div>
-              <div class="flow-box">AI model<br/>accepts</div>
-              <div class="flow-arrow">→</div>
-              <div class="flow-box flow-end">Bad outcomes<br/>get through</div>
-            </div>
-            <p class="flow-caption">A smarter model doesn't fix bad incentives.</p>
-          `;
-          flowEl.dataset.built = '1';
-        }
-      } else {
-        flowEl.classList.remove('visible');
       }
     }
   }

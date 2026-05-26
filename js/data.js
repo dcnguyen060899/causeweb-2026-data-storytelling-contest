@@ -70,42 +70,49 @@ const DATA_WAGE_POLARIZATION = [
   { year: 2024, high_skill: 182, middle_skill:  79, low_skill:  98 }
 ];
 
-// ---------- ACT 4 — Baumol cost disease: sector price growth ----------
-// CLASSIFICATION: PATTERN  (each direction is well-documented in BLS CPI;
-//                          magnitudes are rounded approximations)
-// SOURCE:         BLS Consumer Price Index, selected category indices,
-//                 cumulative percent change 1990 → 2024.
-// NOTE:           Software/electronics have unambiguously fallen; college
-//                 tuition, medical care, childcare, and housing have
-//                 unambiguously risen. Specific values rounded for the
-//                 visual; the directional story is robust.
-const DATA_BAUMOL = [
-  { sector: "Software",        growth_pct:  -90 },
-  { sector: "TVs",             growth_pct:  -96 },
-  { sector: "College Tuition", growth_pct:  220 },
-  { sector: "Medical Care",    growth_pct:  180 },
-  { sector: "Childcare",       growth_pct:  160 },
-  { sector: "Housing",         growth_pct:  120 }
-];
-
-// ---------- ACT 6 — Scarcity spectrum ----------
-// CLASSIFICATION: ILLUSTRATIVE
-// SOURCE:         Author's synthesis of task structure across O*NET
-//                 categories. The x-axis spans "fully automatable" (0)
-//                 to "irreducibly human" (1).
-// NOTE:           Bubble positions communicate the spectrum, not a
-//                 single-source ranking.
-const DATA_SPECTRUM = [
-  { label: "Data entry",            x: 0.05, category: "automated"     },
-  { label: "Legal research",        x: 0.15, category: "automated"     },
-  { label: "Code generation",       x: 0.25, category: "at-risk"       },
-  { label: "Financial modeling",    x: 0.30, category: "at-risk"       },
-  { label: "Diagnosis support",     x: 0.45, category: "hybrid"        },
-  { label: "Teaching",              x: 0.65, category: "human-premium" },
-  { label: "Therapy",               x: 0.78, category: "human-premium" },
-  { label: "Contextual judgment",   x: 0.85, category: "human-premium" },
-  { label: "Trust & presence",      x: 0.95, category: "human-premium" }
-];
+// ---------- ACT 4 — Two technologies, two endings (natural experiment) ----------
+// CLASSIFICATION: MIXED — see per-series notes below.
+// THE CASE:       Two ~10× cost-collapse shocks a generation apart. Both
+//                 displaced their skilled workforce. One produced a lasting
+//                 artisan premium (painting → Impressionism); one produced
+//                 wage collapse (handloom weaving). The difference was the
+//                 institutional response, not the technology.
+// SERIES "weavers": PATTERN (documented). English handloom cotton weavers'
+//                 real weekly wages collapsed by roughly three-quarters as the
+//                 power loom diffused, c.1800–1860 (Bythell 1969; Hobsbawm's
+//                 oft-cited ~24s → ~6s figure). Direction and rough magnitude
+//                 are documented; the smoothed decade index is illustrative of
+//                 that well-established collapse.
+// SERIES "painters": ILLUSTRATIVE. There is no clean wage index for painters.
+//                 The trajectory — sharp mid-century dip as the daguerreotype
+//                 (1839) and wet-plate (1851) destroyed the commercial-portrait
+//                 trade, then recovery as an authenticity/"fine-art" premium
+//                 emerged (Barbizon, then Impressionism from 1874) — is the
+//                 author's synthesis of the qualitative historical record
+//                 (McCauley 1994; Galenson). NOT a measured series.
+// Each series is indexed to 100 at its own first observation so the SHAPES
+// are comparable; the levels are not a cross-series wage comparison.
+const DATA_TECH_TRANSITIONS = {
+  weavers: [
+    { year: 1800, wage: 100 },
+    { year: 1810, wage:  94 },
+    { year: 1820, wage:  74 },
+    { year: 1830, wage:  50 },
+    { year: 1840, wage:  34 },
+    { year: 1850, wage:  26 },
+    { year: 1860, wage:  24 }
+  ],
+  painters: [
+    { year: 1820, wage: 100 },
+    { year: 1835, wage:  97 },
+    { year: 1845, wage:  80 },
+    { year: 1855, wage:  64 },
+    { year: 1865, wage:  73 },
+    { year: 1875, wage:  92 },
+    { year: 1890, wage: 118 },
+    { year: 1900, wage: 140 }
+  ]
+};
 
 // ---------- ACT 5 — Jordan's three pillars (label data) ----------
 // CLASSIFICATION: VERIFIED  (Jordan's published framework)
