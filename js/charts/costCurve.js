@@ -29,6 +29,12 @@ const CostCurve = (() => {
   const FADE_END    = 1.0;
   const SLIDE_VH    = 60;     /* total slide distance in viewport-height units */
 
+  /* Honor prefers-reduced-motion: skip the parallax slide (the counter value
+     still updates and the gentle opacity fade still runs — content stays
+     legible, vestibular-triggering translate motion is dropped). */
+  const REDUCE_MOTION = typeof window !== 'undefined' && window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   let valueEl, yearEl, stageEl;
   let lastWhole = -1;
 
@@ -68,7 +74,7 @@ const CostCurve = (() => {
     //   fade:  eased so the disappearance feels gentle at the boundaries
     if (stageEl) {
       let slideVh = 0;
-      if (tc > SLIDE_START) {
+      if (!REDUCE_MOTION && tc > SLIDE_START) {
         const us = Math.min(1, (tc - SLIDE_START) / (SLIDE_END - SLIDE_START));
         slideVh = us * SLIDE_VH;   /* linear — constant velocity */
       }

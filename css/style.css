@@ -1104,3 +1104,20 @@ code {
   .dial-row { grid-template-columns: 1fr; gap: 0.4rem; }
   .anchor-bad, .anchor-good { text-align: center; }
 }
+
+/* ===================== ACCESSIBILITY: reduced motion ===================== */
+/* Readers who ask their OS to reduce motion get a near-instant version of
+   every CSS transition/animation. Scroll-driven chart state still updates
+   (it's reader-controlled and essential), but the auto-eased fades, slumps,
+   pulses, and the hero parallax slide (gated in costCurve.js) are removed. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
